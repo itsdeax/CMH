@@ -5,77 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hospital Queue Form</title>
 <link rel="stylesheet" href="styles.css">
-<style>
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  margin: 0;
-  padding: 0;
-}
-
-.container {
-  max-width: 400px;
-  margin: 50px auto;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-label {
-  font-weight: bold;
-}
-
-input[type="text"],
-input[type="tel"],
-select {
-  width: calc(100% - 20px);
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-top: 5px;
-  font-size: 16px;
-}
-
-input[type="text"]:focus,
-input[type="tel"]:focus,
-select:focus {
-  outline: none;
-  border-color: #007bff;
-}
-
-small {
-  display: block;
-  margin-top: 5px;
-  color: #666;
-}
-
-button[type="submit"] {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-button[type="submit"]:hover {
-  background-color: #0056b3;
-}
-
-</style>
 </head>
 <body>
 
 <div class="container">
-    <form id="queueForm" action="https://script.google.com/macros/s/AKfycbzDLkfNM3--z_Z0ydklD4QR9i2-cVdGluBCSWSVCdNZ7qDtTPbFnM9u9C4uywZpo2ZJXA/exec" method="POST">
+    <form id="queueForm" action="https://script.google.com/macros/s/AKfycbzTxFVkH48NIfbAb4VU9i7RAq4TtbejCoIilxIo8ur9_PrwL44QQKvqA9TQlP_Ax1HZ6g/exec" method="POST">
       <div class="form-group">
         <label for="prefix">คำนำหน้า:</label>
         <select id="prefix" name="คำนำหน้า" required>
@@ -94,7 +28,7 @@ button[type="submit"]:hover {
       <div class="form-group">
         <label for="phone">เบอร์โทรศัพท์:</label>
         <input type="tel" id="phone" name="เบอร์โทรศัพท์" required>
-        <small>ไม่ต้องใส่ "-" ->รูปแบบ: XXXXXXXXXX</small>
+        <small>ไม่ต้องใส่ - </small>
       </div>
       <button type="submit">ส่งข้อมูล</button>
     </form>
