@@ -75,7 +75,7 @@ button[type="submit"]:hover {
 <body>
 
 <div class="container">
-    <form id="queueForm" action="https://script.google.com/macros/s/AKfycbz4UBQsppfgiB-O3VAMDM1MyIbN_5hwqSxhLo419RHLRg5VHEZKg2Ntn75X1p-xmsijKg/exec" method="POST">
+    <form id="queueForm" action="https://script.google.com/macros/s/AKfycbxzEnzRn02W6SQegSaV8BtsuyJt57fx099KowyNwFJo04W4eUieVqaQ5cgk1HgCgdMDzQ/exec" method="POST">
       <div class="form-group">
         <label for="prefix">คำนำหน้า:</label>
         <select id="prefix" name="คำนำหน้า" required>
@@ -94,7 +94,7 @@ button[type="submit"]:hover {
       <div class="form-group">
         <label for="phone">เบอร์โทรศัพท์:</label>
         <input type="tel" id="phone" name="เบอร์โทรศัพท์" pattern="[0-9]{10}" maxlength="10" required>
-        <small>ไม่ต้องใส่ - </small>
+        <small>โปรดกรอกเบอร์โทรศัพท์ของท่าน 10 หลัก ไม่ต้องใส่ - </small>
       </div>
       <button type="submit">ส่งข้อมูล</button>
     </form>
@@ -116,6 +116,14 @@ button[type="submit"]:hover {
         alert('มีบางอย่างผิดพลาด โปรดลองอีกครั้ง');
       }
     });
+
+    function checkQueueStatus(queueId) {
+      // ตรวจสอบสถานะคิวจาก Google Sheets โดยใช้ API หรือ Google Apps Script
+      // และแสดงผลลัพธ์สถานะคิวไว้ในตำแหน่งที่ต้องการ (ตัวอย่างเช่น div#queueStatus)
+      const queueStatusDiv = document.getElementById('queueStatus');
+      // ทำการแสดงผลลัพธ์
+      queueStatusDiv.innerText = 'ตรวจสอบสถานะคิวสำเร็จ! สถานะคิว: ...'; // อัปเดตสถานะตามที่ได้รับจาก Google Sheets
+    }
   </script>
 
 </body>
