@@ -75,7 +75,10 @@ button[type="submit"]:hover {
 <body>
 
 <div class="container">
-    <form id="queueForm" action="https://script.google.com/macros/s/AKfycbz4UBQsppfgiB-O3VAMDM1MyIbN_5hwqSxhLo419RHLRg5VHEZKg2Ntn75X1p-xmsijKg/exec" method="POST">
+    <div id="login-container">
+      <button id="login-button">Log in with LINE</button>
+    </div>
+    <form id="queueForm" action="https://script.google.com/macros/s/AKfycbz4UBQsppfgiB-O3VAMDM1MyIbN_5hwqSxhLo419RHLRg5VHEZKg2Ntn75X1p-xmsijKg/exec" method="POST" style="display:none;">
       <input type="hidden" id="userId" name="userId">
       <div class="form-group">
         <label for="prefix">คำนำหน้า:</label>
@@ -112,11 +115,7 @@ button[type="submit"]:hover {
       });
       const responseText = await responseData.text();
       if (responseText === 'Success') {
-        // Show a popup with user information
-        const prefix = formData.get('คำนำหน้า');
-        const fullname = formData.get('ชื่อ-สกุล');
-        const phone = formData.get('เบอร์โทรศัพท์');
-        alert(`ข้อมูลของคุณถูกส่งเรียบร้อยแล้ว\nคำนำหน้า: ${prefix}\nชื่อ-สกุล: ${fullname}\nเบอร์โทรศัพท์: ${phone}`);
+        alert('ข้อมูลของคุณถูกส่งเรียบร้อยแล้ว');
       } else {
         alert('มีบางอย่างผิดพลาด โปรดลองอีกครั้ง');
       }
