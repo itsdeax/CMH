@@ -75,7 +75,8 @@ button[type="submit"]:hover {
 <body>
 
 <div class="container">
-    <form id="queueForm" action="https://script.google.com/macros/s/AKfycbxzEnzRn02W6SQegSaV8BtsuyJt57fx099KowyNwFJo04W4eUieVqaQ5cgk1HgCgdMDzQ/exec" method="POST">
+    <form id="queueForm" action="https://script.google.com/macros/s/AKfycbz4UBQsppfgiB-O3VAMDM1MyIbN_5hwqSxhLo419RHLRg5VHEZKg2Ntn75X1p-xmsijKg/exec" method="POST">
+      <input type="hidden" id="userId" name="userId">
       <div class="form-group">
         <label for="prefix">คำนำหน้า:</label>
         <select id="prefix" name="คำนำหน้า" required>
@@ -111,19 +112,48 @@ button[type="submit"]:hover {
       });
       const responseText = await responseData.text();
       if (responseText === 'Success') {
-        alert('ข้อมูลของคุณถูกส่งเรียบร้อยแล้ว');
+        // Show a popup with user information
+        const prefix = formData.get('คำนำหน้า');
+        const fullname = formData.get('ชื่อ-สกุล');
+        const phone = formData.get('เบอร์โทรศัพท์');
+        alert(`ข้อมูลของคุณถูกส่งเรียบร้อยแล้ว\nคำนำหน้า: ${prefix}\nชื่อ-สกุล: ${fullname}\nเบอร์โทรศัพท์: ${phone}`);
       } else {
         alert('มีบางอย่างผิดพลาด โปรดลองอีกครั้ง');
       }
     });
 
-    function checkQueueStatus(queueId) {
-      // ตรวจสอบสถานะคิวจาก Google Sheets โดยใช้ API หรือ Google Apps Script
-      // และแสดงผลลัพธ์สถานะคิวไว้ในตำแหน่งที่ต้องการ (ตัวอย่างเช่น div#queueStatus)
-      const queueStatusDiv = document.getElementById('queueStatus');
-      // ทำการแสดงผลลัพธ์
-      queueStatusDiv.innerText = 'ตรวจสอบสถานะคิวสำเร็จ! สถานะคิว: ...'; // อัปเดตสถานะตามที่ได้รับจาก Google Sheets
+    // Function to handle LINE Login
+    document.getElementById('login-button').addEventListener('click', function() {
+      const lineLoginUrl = 'https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&state=12345abcde&scope=profile%20openid';
+      window.location.href = lineLoginUrl;
+    });
+
+    // After LINE Login, extract the user ID
+    function getUserIdFromLine() {
+      // Extract the ID token from the URL
+      const params = new URLSearchParams(window.location.search);
+      const idToken = params.get('id_token');
+      if (idToken) {
+        // Decode the ID token to get the user ID
+        const base64Url = idToken.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        const userData = JSON.parse(jsonPayload);
+        return userData.sub; // LINE user ID
+      }
+      return null;
     }
+
+    // Check if user is logged in and get user ID
+    const userId = getUserIdFromLine();
+    if (userId) {
+      document.getElementById('userId').value = userId;
+      document.getElementById('login-container').style.display = 'none';
+      form.style.display = 'block';
+    }
+
   </script>
 
 </body>
